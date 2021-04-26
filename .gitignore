@@ -1,0 +1,47 @@
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+
+#NDK
+obj/
+app/.externalNativeBuild/
+
+apk/
+
+venv/
+.idea/
+*.sqlite3
+*.pyc
+
+
+# media files
+media/
+
+# secret.py
+secret.py
+
+# static files
+# static/
+
+# vs code
+.vscode/
+
+# Celery Beat Schedule
+celerybeat-schedule
+celerybeat.pid
