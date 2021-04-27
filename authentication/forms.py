@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext, gettext_lazy as _
+
 from rolepermissions.roles import assign_role
 
 from allauth.account.forms import (
@@ -33,10 +35,17 @@ class SignupForm(AASignupForm):
 
     field_order = ['name', 'email', 'username', 'entity_type', 'mobile_number',  'password', 'confirm_password']
 
+    def clean_mobile_number(self):
+        value = self.cleaned_data["mobile_number"]
+        if Entity.active.filter(mobile_number=value):
+            raise forms.ValidationError(
+                _('Mobile Number Already Exists!')
+            )
+        return value
+
     def save(self, request):
-        # Ensure you call the parent class's save.
-        # .save() returns a User object.
         user = super().save(request)
+        print(self.cleaned_data.get('mobile_number'))
         entity = Entity.objects.create(
             user=user,
             mobile_number=self.cleaned_data.pop('mobile_number'),
@@ -44,8 +53,5 @@ class SignupForm(AASignupForm):
             entity_type=self.cleaned_data.pop('entity_type'),
         )
         assign_role(user, 'entity')
-
-        # Add your own processing here.
-
-        # You must return the original result.
+        print(user, entity)
         return user

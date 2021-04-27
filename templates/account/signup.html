@@ -14,13 +14,18 @@
      background-size: cover;
   }
 
+  .errorlist{
+    color:red;
+    font-size:11px;
+  }
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
 
-<!--  <h3 class="center-align red-text">{% trans "Sign Up" %}</h3>-->
+  <!--  <h3 class="center-align red-text">{% trans "Sign Up" %}</h3>-->
 
   <div class="row valign-wrapper center-align">
 
@@ -32,12 +37,20 @@
       <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% if form.errors %}
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger red-text">
+          <strong>{{ error|escape }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% csrf_token %}
         <div class="row">
           {% for field in form %}
-          <div class="col {% if field.name == 'username' or field.name == 'entity_type'  %}s6 {% else %} s12 {% endif %} input-field">
+          <div class="col {% if field.name == 'mobile_number' or field.name == 'entity_type'  %}s6 {% else %} s12 {% endif %} input-field">
             {% render_field field %}
             <label for="{{ field.auto_id }}"> {{ field.label }} </label>
+            <span class="helper red-text">{{ field.errors }}</span>
           </div>
           {% endfor %}
         </div>

@@ -21,7 +21,7 @@
 
 <div class="container">
 
-<!--  <h3 class="center-align red-text">{% trans "Sign In" %}</h3>-->
+  <!--  <h3 class="center-align red-text">{% trans "Sign In" %}</h3>-->
 
   <div class="row valign-wrapper center-align">
 
@@ -31,9 +31,17 @@
       </div>
 
       <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% if form.errors %}
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger red-text">
+          <strong>{{ error|escape }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% csrf_token %}
         {% for field in form  %}
         {{ field }} <br>
+        <p class="red-text">{{ field.errors }}</p>
         {% endfor %}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
