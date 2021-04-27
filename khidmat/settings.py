@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cities_light',
     'rolepermissions',
     'ckeditor',
+    'widget_tweaks',
 
     'authentication',
     'generic',

@@ -1,0 +1,33 @@
+{% load static %}
+<div class="navbar-fixed">
+
+  <nav class="teal">
+    <div class="nav-wrapper">
+      <a href="{% url 'home' %}" class="brand-logo white-text">
+        <img src="{% static 'khidmat/img/khidmat.png' %}" height="60"><br>
+      </a>
+      <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{% url 'requirement_list' %}">Requirements</a></li>
+        <li><a href="badges.html">Resources</a></li>
+        <li><a href="collapsible.html">Doctors</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<ul class="sidenav" id="mobile-nav">
+  <li><a href="#">Home</a></li>
+  <li><a href="{% url 'requirement_list' %}">Requirements</a></li>
+  <li><a href="badges.html">Resources</a></li>
+  <li><a href="collapsible.html">Doctors</a></li>
+</ul>
+
+<script>
+  	$(document).ready(function(){
+ 		$('.sidenav').sidenav();
+ 	});
+</script>

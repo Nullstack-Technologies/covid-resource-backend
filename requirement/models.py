@@ -22,7 +22,7 @@ class Requirement(AuditModel, LocationModel):
     long_description = models.CharField(max_length=4096)
     status = FSMField(default=STATES[0], choices=STATES)
     deadline = models.DateTimeField(help_text='Time to Expire this requirement', null=True, blank=True)
-    extra_information = models.CharField(max_length=1000)
+    extra_information = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.title

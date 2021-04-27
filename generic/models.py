@@ -140,18 +140,6 @@ class SEOModel(BaseModel):
     )
 
 
-# class City(AbstractCity):
-#     pass
-
-#
-# class Region(AbstractRegion):
-#     pass
-#
-#
-# class Country(AbstractCountry):
-#     pass
-
-
 class LocationModel(BaseModel):
     """
         This is an abstract model to store

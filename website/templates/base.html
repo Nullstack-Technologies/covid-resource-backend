@@ -1,49 +1,26 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="rtl">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{% block title %}Covid Requirement and Resources | Khidmat & Zariya{% endblock %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{% static "vendor/fontawesome-free/css/all.min.css" %}">
-
-    <!-- Bootstrap and adminLTE -->
-    <link rel="stylesheet" href="{% static "vendor/adminlte/css/adminlte.min.css" %}" id="adminlte-css">
-
-    <!-- Custom fixes for django -->
-    <link rel="stylesheet" href="{% static "jazzmin/css/main.css" %}">
-
-    <!-- favicons -->
-    <link rel="shortcut icon" href="#" type="image/png">
-    <link rel="icon" href="#" sizes="32x32" type="image/png">
-
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    {% block extrastyle %} {% endblock %}
-    {% block extrahead %} {% endblock %}
 </head>
-<body class="hold-transition">
+
+<body>
+{% include 'includes/navbar.html' %}
 
 {% block content %}
 {% endblock %}
 
-<!-- jQuery -->
-<script src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static "vendor/adminlte/js/adminlte.min.js" %}"></script>
-<!-- Django customisations -->
-<script src="{% static "jazzmin/js/main.js" %}"></script>
-
-<script src="{% static "jazzmin/js/ui-builder.js" %}"></script>
-
+{% include 'includes/footer.html' %}
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js' %}"></script>
 {% block extrajs %}{% endblock %}
 
 </body>

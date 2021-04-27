@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cities_light', '0011_auto_20210426_1925'),
         ('entity', '0003_remove_entity_city'),
     ]
 
