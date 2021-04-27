@@ -48,6 +48,7 @@
             <span class="title">{{ requirement.title }}</span>
             <p> {{requirement.short_description}} <br>
                 Deadline: {{ requirement.deadline|default:"NA" }} <br>
+                Location: {{ requirement.address }}, {{ requirement.pin_code }}, {{ requirement.city }} <br>
                 Status: <span class="teal white-text p-4"> {{ requirement.status }} </span>
             </p>
             <a id="scale-demo" href="#!" class="btn-floating btn-sm scale-transition secondary-content">
@@ -63,15 +64,15 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.datepicker');
-    var instances = M.Datepicker.init(elems, options);
+    var instances = M.Datepicker.init(elems);
   });
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
+    var instances = M.FormSelect.init(elems);
   });
    document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
+    var instances = M.Collapsible.init(elems);
   });
 
   $(document).ready(function(){

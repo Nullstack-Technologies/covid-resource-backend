@@ -1,0 +1,54 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block extra_style %}
+<style>
+  body{
+    background-image:url('{% static 'khidmat/img/login.jpeg'%}');
+    background-repeat: no-repeat;
+     background-size: cover;
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<!--  <h3 class="center-align red-text">{% trans "Sign In" %}</h3>-->
+
+  <div class="row valign-wrapper center-align">
+
+    <div class="col card hoverable s12 m4" style="padding:20px;">
+      <div style="text-align:center">
+        <img  src="{% static 'khidmat/img/khidmat.png' %}" height="100">
+      </div>
+
+      <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {% for field in form  %}
+        {{ field }} <br>
+        {% endfor %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <a class="button secondaryAction red-text" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <p>{% blocktrans %}Don't have an account?
+          <a href="{{ signup_url }}">Sign Up!</a>{% endblocktrans %}</p>
+        <button class="waves-effect waves-light btn" type="submit">{% trans "Sign In" %}<i class="material-icons right">send</i>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

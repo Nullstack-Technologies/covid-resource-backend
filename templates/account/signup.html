@@ -1,0 +1,65 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block extra_style %}
+<style>
+  body{
+    background-image:url('{% static 'khidmat/img/login.jpeg'%}');
+    background-repeat: no-repeat;
+     background-size: cover;
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<!--  <h3 class="center-align red-text">{% trans "Sign Up" %}</h3>-->
+
+  <div class="row valign-wrapper center-align">
+
+    <div class="col card hoverable s6" style="padding:20px;">
+      <div style="text-align:center">
+        <img  src="{% static 'khidmat/img/khidmat.png' %}" height="100">
+      </div>
+
+      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <div class="row">
+          {% for field in form %}
+          <div class="col {% if field.name == 'username' or field.name == 'entity_type'  %}s6 {% else %} s12 {% endif %} input-field">
+            {% render_field field %}
+            <label for="{{ field.auto_id }}"> {{ field.label }} </label>
+          </div>
+          {% endfor %}
+        </div>
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="waves-effect waves-light btn" type="submit">{% trans "Join the Cause" %}<i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
+  <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+
+</script>
+</div>
+{% endblock %}

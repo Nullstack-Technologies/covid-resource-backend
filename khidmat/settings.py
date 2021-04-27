@@ -39,12 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'imagekit',
     'cities_light',
     'rolepermissions',
     'ckeditor',
     'widget_tweaks',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'captcha',
 
     'authentication',
     'generic',
@@ -68,7 +73,7 @@ ROOT_URLCONF = 'khidmat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +87,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'khidmat.wsgi.application'
+
+SITE_ID = 1
 
 
 # Database
@@ -114,6 +121,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
+ROLEPERMISSIONS_MODULE = 'khidmat.roles'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -164,6 +177,19 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# RECaptcha Settings
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
+
+# All AUth Settings
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+ACCOUNT_SESSION_REMEMBER = False
+ACCOUNT_FORMS = {
+    'login': 'authentication.forms.LoginForm',
+    'signup': 'authentication.forms.SignupForm'
+}
 
 from .secret import *
 from .jazzmin import *
