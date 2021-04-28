@@ -18,12 +18,13 @@ User = get_user_model()
 
 
 class LoginForm(AALoginForm):
+    pass
     # captcha = ReCaptchaField()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            print(visible.name)
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     for visible in self.visible_fields():
+    #         print(visible.name)
 
 
 class SignupForm(AASignupForm):
@@ -45,7 +46,6 @@ class SignupForm(AASignupForm):
 
     def save(self, request):
         user = super().save(request)
-        print(self.cleaned_data.get('mobile_number'))
         entity = Entity.objects.create(
             user=user,
             mobile_number=self.cleaned_data.pop('mobile_number'),

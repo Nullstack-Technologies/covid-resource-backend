@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Resource
+
+from generic.admin import AuditAdminMixin
+
+
+@admin.register(Resource)
+class ResourceAdmin(AuditAdminMixin):
+    pass

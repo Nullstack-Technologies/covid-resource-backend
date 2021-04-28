@@ -5,17 +5,29 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<div class="container">
+  <br>
+  <div class="row valign-wrapper center-align">
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+    <div class="col card hoverable s12" style="padding:20px;">
+      <h3 class="center-align teal-text">{% trans "Sign Out" %}</h3>
+      <br>
+      <p>{% trans 'Are you sure you want to sign out?' %}</p>
+
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="waves-effect waves-light btn" type="submit">{% trans 'Yes, Sign Me Out' %}</button>
+
+        <a href="{{ redirect_field_value }}" class="waves-effect waves-light btn red" type="submit">{% trans 'Nope' %}</a>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 
 {% endblock %}

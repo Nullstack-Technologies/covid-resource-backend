@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <h3 class="center-align"> Urgent Covid Resources </h3>
+    <ul class="collapsible">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">sort</i>Toggle Filters</div>
+            <div class="collapsible-body">
+                <form method="get">
+                    <div class="row">
+                        <div class="col s6">
+                            {{ filter.form.search.label_tag }}
+                            {% render_field filter.form.search %}
+                        </div>
+                        <div class="col s6">
+                            {{ filter.form.deadline.label_tag }}
+                            {% render_field filter.form.deadline class="datepicker"%}
+                        </div>
+                        <div class="col s6 select-wrapper">
+                            {{ filter.form.city.label_tag }}
+                            {% render_field filter.form.city class="select-dropdown dropdown-trigger" placeholder=filter.form.city.label %}
+                        </div>
+                        <div class="col s6 select-wrapper">
+                            {{ filter.form.status.label_tag }}
+                            {% render_field filter.form.status class="select-dropdown dropdown-trigger" placeholder=filter.form.status.label %}
+                        </div>
+                        <div class="col s6">
+                            {{ filter.form.pin_code.label_tag }}
+                            {% render_field filter.form.pin_code class="" placeholder=filter.form.pin_code.label %}
+                        </div>
+                        <div class="col s12 center-align" style="margin:25px;">
+                            <input class="btn waves-effect waves-light" type="submit" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </li>
+    </ul>
+
+    {% for resource in resources %}
+    <ul class="collection">
+        <li class="collection-item avatar">
+            <i class="material-icons circle teal white-text align-center">priority_high</i>
+            <span class="title">{{ resource.title }}</span>
+            <p> {{resource.short_description}} <br>
+                Deadline: {{ resource.deadline|default:"NA" }} <br>
+                Location: {{ resource.address }}, {{ resource.pin_code }}, {{ resource.city }} <br>
+                Status: <span class="teal white-text p-4"> {{ resource.status }} </span>
+            </p>
+            <a id="scale-demo" href="#!" class="btn-floating btn-sm scale-transition secondary-content">
+                <i class="material-icons">send</i>
+            </a>
+        </li>
+    </ul>
+    {% endfor %}
+
+    {% include 'includes/paginator.html' %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems);
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+
+  $(document).ready(function(){
+    $('select').formSelect();
+    $('.datepicker').datepicker();
+    $('.collapsible').collapsible();
+  });
+
+</script>
+{% endblock %}
